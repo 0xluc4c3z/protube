@@ -3,23 +3,34 @@ import './App.css'
 
 function App() {
 
+  const [isChecked, setIsChecked] = useState(false);
   const inputRef = useRef();
   
   const searchProductly = async () =>{
     let input = inputRef.current.value
-    
-    if (input != ""){
-      window.open(`https://www.youtube.com/results?search_query=${input}`)
+    console.log(isChecked);
+    if (isChecked){
+      if (input != ""){
+        window.open(`https://www.youtube.com/results?search_query=${input}`)
+      }
+    } else if (!isChecked){
+      if (input != ""){
+        window.location = `https://www.youtube.com/results?search_query=${input}`
+      }
     }
     
       
+  }
+
+  const changeCheck = async (e) =>{
+    setIsChecked(e.target.checked)
   }
 
   return (
     <div className="App">
       <img src="exlin.png" alt="" class="external" />
       <div class="container">
-          <input type="checkbox" class="checkbox" id="checkbox"/>
+          <input type="checkbox" class="checkbox" id="checkbox" onChange={changeCheck}/>
         <label class="switch" for="checkbox">
           <span class="slider"></span>
         </label>
